@@ -192,37 +192,85 @@ function HonorSpy:OnHide()
 end
 
 -- CHAT COMMANDS
-local options = { 
-	type='group',
+local options = {
+	type = 'group',
 	args = {
 		show = {
 			type = 'execute',
-			name = 'Show HonorSpy Standings',
-			desc = 'Show HonorSpy Standings',
+			name = 'Show standings table',
+			desc = 'Show standings table',
 			func = function() HonorSpyStandings:Toggle() end
+		},
+		report = {
+			type = 'execute',
+			name = 'Show standings for said player',
+			desc = 'Show standings for said player',
+			usage = 'PlayerOfInterest',
+			func = function() HonorSpy:Report() end
+		},
+		search = {
+			type = 'text',
+			name = 'Show standings for said player',
+			desc = 'Show standings for said player',
+			usage = 'PlayerOfInterest',
+			get = function() return '-' end,
+			set = function(info) HonorSpy:Report(info) end
 		}
 	}
 }
 HonorSpy:RegisterChatCommand({"/honorspy", "/hs"}, options)
 
--- REPORT
-function HonorSpy:Report()
-	if (not HonorSpy.player_standing) then
-		self:Print("Open HonorSpy table at least once to estimate your standing");
-		return
-	end;
+function HonorSpy:HumanTime(t)
+	local res
+	
+	if (t/86400 > 1) then
+		res = ""..math.floor(t/86400).."d"
+	elseif (t/3600 > 1) then
+		res = ""..math.floor(t/3600).."h"
+	elseif (t/60 > 1) then
+		res = ""..math.floor(t/60).."m"
+	else
+		res = ""..t.."s"
+	end
+	
+	return res
+end
 
+-- REPORT
+function HonorSpy:Report(playerOfInterest)
+	if (not playerOfInterest) then
+		playerOfInterest = playerName
+	end
+	
+	playerOfInterest = string.upper(string.sub(playerOfInterest, 1, 1))..string.lower(string.sub(playerOfInterest, 2))
+	
+	local standing = -1
+	local t = HonorSpyStandings:BuildStandingsTable()
+	local avg_lastchecked = 0;
+	self.pool_size = table.getn(t);
+	for i = 1, table.getn(t) do
+		avg_lastchecked = avg_lastchecked + t[i][8]
+		if (playerOfInterest == t[i][1]) then
+			standing = i
+		end
+	end
+	avg_lastchecked = avg_lastchecked / self.pool_size
 			  -- 1   2     3      4		 5		 6		7		8		9	10		11		12		13	14
 	local brk = {1, 0.858, 0.715, 0.587, 0.477, 0.377, 0.287, 0.207, 0.137, 0.077, 0.037, 0.017, 0.007, 0.002} -- brackets percentage
 	local RP  = {0, 400} -- RP for each bracket
 	local Ranks = {0, 2000} -- RP for each rank
 
-	local standing = HonorSpy.player_standing;
-	local pool_size = HonorSpy.pool_size;
+	if (not HonorSpy.db.realm.hs.currentStandings[playerOfInterest]) then
+		ChatFrame1:AddMessage('Unknown player '..playerOfInterest, 1, 0, 0)
+		return playerOfInterest
+	end
+	
+	--local compute_pool_size = HonorSpy.pool_size;
+	local compute_pool_size = 3289; -- using Anathema's usual pool size
 	local my_bracket = 1;
 	local inside_br_progress = 0;
 	for i = 2,14 do
-		brk[i] = math.floor(brk[i]*pool_size+.5);
+		brk[i] = math.floor(brk[i]*compute_pool_size+.5);
 		if (standing > brk[i]) then
 			inside_br_progress = (brk[i-1] - standing)/(brk[i-1] - brk[i])
 			break
@@ -234,13 +282,16 @@ function HonorSpy:Report()
 		RP[i] = (i-2) * 1000;
 		Ranks[i] = (i-2) * 5000;
 	end
+	local honor = HonorSpy.db.realm.hs.currentStandings[playerOfInterest].thisWeekHonor
+	local lastchecked = HonorSpy.db.realm.hs.currentStandings[playerOfInterest].last_checked
 	local award = RP[my_bracket] + 1000 * inside_br_progress;
-	local RP = HonorSpy.db.realm.hs.currentStandings[playerName].RP;
+	local RP = HonorSpy.db.realm.hs.currentStandings[playerOfInterest].RP;
 	local EstRP = math.floor(RP*0.8+award+.5);
-	local Rank = HonorSpy.db.realm.hs.currentStandings[playerName].rank;
+	local Rank = HonorSpy.db.realm.hs.currentStandings[playerOfInterest].rank;
 	local EstRank = 14;
 	local Progress = math.floor(GetPVPRankProgress()*100);
 	local EstProgress = math.floor((EstRP - math.floor(EstRP/5000)*5000) / 5000*100);
+	local RecPoolSize = HonorSpy.pool_size
 	for i = 3,14 do
 		if (EstRP < Ranks[i]) then
 			EstRank = i-1;
@@ -248,8 +299,13 @@ function HonorSpy:Report()
 		end
 	end
 
-	SendChatMessage("- HonorSpy: Standing = "..standing..",  Bracket = "..my_bracket..",  current RP = "..RP..",  Next Week RP = "..EstRP,"emote")
-	SendChatMessage("- HonorSpy: Current Rank = "..Rank.." ("..Progress.."%), Next Week Rank = "..EstRank.." ("..EstProgress.."%)", "emote")
+	ChatFrame1:AddMessage("HonorSpy Report for: "..playerOfInterest..", Last Checked: "..self:HumanTime(time() - lastchecked), 1, 0.5, 0)
+	ChatFrame1:AddMessage("Avg. Last Check: "..self:HumanTime(time() - avg_lastchecked), 1, 0.5, 0)
+	ChatFrame1:AddMessage("Pool Size = "..RecPoolSize..", Standing = "..standing..",  Bracket = "..my_bracket..", Honor = "..honor, 0, 1, 1)
+	ChatFrame1:AddMessage("Cur. RP = "..RP..",  Next Week RP = "..EstRP, 0, 1, 1)
+	ChatFrame1:AddMessage("Cur. Rank = "..Rank.." ("..Progress.."%), Next Week Rank = "..EstRank.." ("..EstProgress.."%)", 0, 1, 1)
+	
+	return playerOfInterest
 end
 
 -- MINIMAP
@@ -299,11 +355,11 @@ function BuildMenu()
 		type = "execute",
 		name = "Report My Standing",
 		desc = "Reports your current standing as emote",
-		func = function() HonorSpy:Report() end,
+		func = function() HonorSpy:Report(playerName) end,
 	}
 	options.args["purge_data"] = {
 		type = "execute",
-		name = "_ purge all data",
+		name = "Purge all data",
 		desc = "Delete all collected data",
 		func = function() purgeData() end,
 	}
