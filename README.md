@@ -1,3 +1,14 @@
+### Fork of [kakysha/HonorSpy](https://github.com/kakysha/HonorSpy)
+
+Un-merged additions:
+1. Reports using the private ChatFrame1 instead of the public emote channel
+2. Improved reports, notably shows the average Last Checked time of the record pool ("about how outdated is my data?")
+3. Added two commands: `/hs report` (self) and `/hs search PlayerName` (someone else)
+4. Reduced the standing table display to the highest 300 standings only (reduces lag/freeze on opening). _TODO WTF setting for that number, and GUI or Slash command to parametrise it_
+5. Using 3200 (hardcoded) as the pool size for bracket calculations. This is the weekly average for Anathema (Horde). The size of the gathered pool is displayed upon `/hs report` but it isn't used for bracket calculations. _TODO WTF setting for that pool size, and GUI or Slash command to parametrise it_
+
+Note: Brackets use the ascending notation. Bracket N is the bracket awarding progression towards rank N. (Clarification as Bracket 14 is commonly referred to as "Bracket 1" on Anathema).
+
 ### Install
 Download zip of 'master' branch (just click Clone or Download -> Download ZIP), unzip the archive, remove '-master' suffix from folder name and put it in Interface/Addons folder, relaunch WoW.
 
@@ -20,9 +31,10 @@ Reset day can be configured, default is Wednesday. Reset time is fixed at 10AM U
 P.S. Do not be afraid of loosing all your data, very likely that another players with HonorSpy will push you their database very soon. The more players use and collects data -> the more up-to-date data you will have. Magic of sync.
 
 ### Commands
-`/hs show` -> show/hide standings table
-
-`/hs standby` -> enable/disable addon (in case you disabled it from right-click menu this helps to re-enable it)
+* `/hs report` -> shows your own standing report and rank estimate
+* `/hs search PlayerName` -> shows another player's standing report and rank estimate (case insensitive)
+* `/hs show` -> show/hide standings table
+* `/hs standby` -> enable/disable addon (in case you disabled it from right-click menu this helps to re-enable it)
 
 ### Screenshot
 
