@@ -1,11 +1,12 @@
 ### Fork of [kakysha/HonorSpy](https://github.com/kakysha/HonorSpy)
 
 Un-merged additions:
-1. Reports using the private ChatFrame1 instead of the public emote channel
-2. Improved reports, notably shows the average Last Checked time of the record pool ("about how outdated is my data?")
-3. Added two commands: `/hs report` (self) and `/hs search PlayerName` (someone else)
-4. Reduced the standing table display to the highest 300 standings only (reduces lag/freeze on opening). _TODO WTF setting for that number, and GUI or Slash command to parametrise it_
-5. Using 3200 (hardcoded) as the pool size for bracket calculations. This is the weekly average for Anathema (Horde). The size of the gathered pool is displayed upon `/hs report` but it isn't used for bracket calculations. _TODO WTF setting for that pool size, and GUI or Slash command to parametrise it_
+* Reports using the private ChatFrame1 instead of the public emote channel
+* Improved reports, notably shows the average Last Checked time of the record pool ("about how outdated is my data?")
+* Added two commands: `/hs report` (self) and `/hs search PlayerName` (someone else)
+* Don't need to open the standing table before a report, the report request will trigger the computations by itself
+* Reduced the standing table display to the highest 300 standings only (reduces lag/freeze on opening). _TODO WTF setting for that number, and GUI or Slash command to parametrise it_
+* Using 3200 (hardcoded) as the pool size for bracket calculations. This is the weekly average for Anathema (Horde). The size of the gathered pool is displayed upon `/hs report` but it isn't used for bracket calculations. _TODO WTF setting for that pool size, and GUI or Slash command to parametrise it_
 
 Note: Brackets use the ascending notation. Bracket N is the bracket awarding progression towards rank N. (Clarification as Bracket 14 is commonly referred to as "Bracket 1" on Anathema).
 
