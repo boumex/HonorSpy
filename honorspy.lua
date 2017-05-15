@@ -289,8 +289,22 @@ function HonorSpy:Report(playerOfInterest)
 	local EstRP = math.floor(RP*0.8+award+.5);
 	local Rank = HonorSpy.db.realm.hs.currentStandings[playerOfInterest].rank;
 	local EstRank = 14;
-	local Progress = math.floor(GetPVPRankProgress()*100);
-	local EstProgress = math.floor((EstRP - math.floor(EstRP/5000)*5000) / 5000*100);
+    local Progress;
+    if (RP < 2000) then
+        Progress = math.floor(100 * math.mod(RP, 2000) / 2000);
+    elseif (RP >= 2000 and RP < 5000) then
+        Progress = math.floor(100 * math.mod(RP - 2000, 3000) / 3000);
+    else
+        Progress = math.floor(100 * math.mod(RP, 5000) / 5000);
+    end
+    local EstProgress;
+    if (EstRP < 2000) then
+        EstProgress = math.floor(100 * math.mod(EstRP, 2000) / 2000);
+    elseif (EstRP >= 2000 and EstRP < 5000) then
+        EstProgress = math.floor(100 * math.mod(EstRP - 2000, 3000) / 3000);
+    else
+        EstProgress = math.floor(100 * math.mod(EstRP, 5000) / 5000);
+    end
 	local RecPoolSize = HonorSpy.pool_size
 	for i = 3,14 do
 		if (EstRP < Ranks[i]) then
