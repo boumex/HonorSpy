@@ -13,7 +13,7 @@ HonorSpy:RegisterDefaults('realm', {
 local commPrefix = "HonorSpy";
 HonorSpy:SetCommPrefix(commPrefix)
 
-local VERSION = 2;
+local VERSION = 3;
 local paused = false; -- pause all inspections when user opens inspect frame
 local playerName = UnitName("player");
 
@@ -174,7 +174,7 @@ function HonorSpy:OnClick()
 	HonorSpyStandings:Toggle()
 end
 function HonorSpy:OnTooltipUpdate()
-  T:SetHint("by Kakysha, v"..tostring(VERSION))
+  T:SetHint("by Kakysha & Mistaboom, v"..tostring(VERSION))
 end
 
 -- PAUSING to not mess with native inspect calls
