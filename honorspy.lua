@@ -266,7 +266,7 @@ function HonorSpy:Report(playerOfInterest)
 	end
 	
 	--local compute_pool_size = HonorSpy.pool_size;
-	local compute_pool_size = 3289; -- using Anathema's usual pool size
+	local compute_pool_size = 2841; -- using Anathema's usual pool size
 	local my_bracket = 1;
 	local inside_br_progress = 0;
 	for i = 2,14 do
