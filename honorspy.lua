@@ -255,9 +255,9 @@ function HonorSpy:Report(playerOfInterest)
 		end
 	end
 	avg_lastchecked = avg_lastchecked / self.pool_size
-			  -- 1   2     3      4		 5		 6		7		8		9	10		11		12		13	14
-	--local brk = {1, 0.858, 0.715, 0.587, 0.477, 0.377, 0.287, 0.207, 0.137, 0.077, 0.037, 0.017, 0.007, 0.002} -- brkpoints (pre-1.12)
-	local brk = {1, 0.845, 0.697, 0.566, 0.436, 0.327, 0.228, 0.159, 0.100, 0.060, 0.035, 0.020, 0.008, 0.003} -- brkpoints (post-1.12)
+	--           1    2      3      4      5      6      7	    8      9      10     11     12    13     14
+	local brk = {1, 0.858, 0.715, 0.587, 0.477, 0.377, 0.287, 0.207, 0.137, 0.077, 0.037, 0.017, 0.007, 0.002} -- brkpoints (pre-1.12)
+	--local brk = {1, 0.845, 0.697, 0.566, 0.436, 0.327, 0.228, 0.159, 0.100, 0.060, 0.035, 0.020, 0.008, 0.003} -- brkpoints (post-1.12)
 	local RP  = {0, 400} -- RP for each bracket
 	local Ranks = {0, 2000} -- RP for each rank
 
