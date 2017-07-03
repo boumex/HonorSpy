@@ -1,5 +1,12 @@
 ### Fork of [kakysha/HonorSpy](https://github.com/kakysha/HonorSpy)
 
+### V4
+Un-merged additions:
+Added slash command to limit number of players shown in table to a specified value. Table functionality was becoming near unusable on Elysium.
+_Removed artificial limitation from previous version.
+
+
+### V3
 Un-merged additions:
 * Reports using the private ChatFrame1 instead of the public emote channel
 * Improved reports, notably shows the average Last Checked time of the record pool ("about how outdated is my data?")
@@ -28,13 +35,14 @@ Options can be invoked by right clicking on the minimap icon.
 It only stores players with >15HKs.
 Reset day can be configured, default is Wednesday. Reset time is fixed at 10AM UTC.
 
-P.S. Do not be afraid of loosing all your data, very likely that another players with HonorSpy will push you their database very soon. The more players use and collects data -> the more up-to-date data you will have. Magic of sync.
+P.S. Do not be afraid of losing all your data, very likely that another players with HonorSpy will push you their database very soon. The more players use and collects data -> the more up-to-date data you will have. Magic of sync.
 
 ### Commands
-* `/hs report` -> shows your own standing report and rank estimate
-* `/hs search PlayerName` -> shows another player's standing report and rank estimate (case insensitive)
-* `/hs show` -> show/hide standings table
-* `/hs standby` -> enable/disable addon (in case you disabled it from right-click menu this helps to re-enable it)
+* `/hs report` -> shows your own standing report and rank estimate.
+* `/hs search PlayerName` -> shows another player's standing report and rank estimate (case insensitive).
+* `/hs players limit` -> defines the max number of players to show in standings table.
+* `/hs show` -> show/hide standings table.
+* `/hs standby` -> enable/disable addon (in case you disabled it from right-click menu this helps to re-enable it).
 
 ### Screenshot
 
