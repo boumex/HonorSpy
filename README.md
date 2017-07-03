@@ -2,8 +2,7 @@
 
 ### V4
 Un-merged additions:
-Added slash command to limit number of players shown in table to a specified value. Table functionality was becoming near unusable on Elysium.
-_Removed artificial limitation from previous version.
+* Added slash command `/hs players 0-10000` to limit number of players shown in table to a specified value. Table functionality was becoming near unusable on Elysium. _Removed artificial limitation from previous version._
 
 
 ### V3
@@ -40,7 +39,7 @@ P.S. Do not be afraid of losing all your data, very likely that another players 
 ### Commands
 * `/hs report` -> shows your own standing report and rank estimate.
 * `/hs search PlayerName` -> shows another player's standing report and rank estimate (case insensitive).
-* `/hs players limit` -> defines the max number of players to show in standings table.
+* `/hs players 0-10000` -> defines the max number of players to show in standings table.
 * `/hs show` -> show/hide standings table.
 * `/hs standby` -> enable/disable addon (in case you disabled it from right-click menu this helps to re-enable it).
 
