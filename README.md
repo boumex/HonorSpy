@@ -1,6 +1,8 @@
 ### Fork of [kakysha/HonorSpy](https://github.com/kakysha/HonorSpy)
 
 ### V4
+**Delete your WOWFOLDER/WTF/Account/ACCOUNTNAME/SavedVariables/HonorSpy.lua and HonorSpy.lua.bak prior to updating if you are coming from a previous version of HonorSpy.**
+
 Un-merged additions:
 * Added slash command `/hs players 0-10000` to limit number of players shown in table to a specified value. Table functionality was becoming near unusable on Elysium. _Removed artificial limitation from previous version._
 
