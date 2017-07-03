@@ -4,6 +4,7 @@ local T = AceLibrary("Tablet-2.0")
 HonorSpy:RegisterDB("HonorSpyDB")
 HonorSpy:RegisterDefaults('realm', {
 	hs = {
+		limit = 750,
 		currentStandings = {},
 		last_reset = 0,
 		sort = "ThisWeekHonor"
@@ -13,7 +14,7 @@ HonorSpy:RegisterDefaults('realm', {
 local commPrefix = "HonorSpy";
 HonorSpy:SetCommPrefix(commPrefix)
 
-local VERSION = "3";
+local VERSION = "4";
 local paused = false; -- pause all inspections when user opens inspect frame
 local playerName = UnitName("player");
 
@@ -174,7 +175,7 @@ function HonorSpy:OnClick()
 	HonorSpyStandings:Toggle()
 end
 function HonorSpy:OnTooltipUpdate()
-  T:SetHint("by Kakysha & Mistaboom, v"..tostring(VERSION))
+  T:SetHint("by Kakysha, Mistaboom, and Moxie v"..tostring(VERSION))
 end
 
 -- PAUSING to not mess with native inspect calls
@@ -215,6 +216,19 @@ local options = {
 			usage = 'PlayerOfInterest',
 			get = function() return '-' end,
 			set = function(info) HonorSpy:Report(info) end
+		},		
+		players = {
+			type = 'range',
+			name = 'Limit players shown in standings list',
+			desc = 'Limit players shown in standings list. Default is 750. Set 0 for no limit.',
+			min = 0,
+			max = 10000,
+			set = function(value)
+				HonorSpy.db.realm.hs.limit = value				
+			end,
+			get = function()
+				return HonorSpy.db.realm.hs.limit
+			end
 		}
 	}
 }
