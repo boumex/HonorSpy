@@ -69,39 +69,46 @@ function HonorSpyStandings:OnTooltipUpdate()
 	)
 	
 	local t = self:BuildStandingsTable()
+	x = 0
+	-- If limit is set to "infinite" set incrementer to unlikely number
+	if (HonorSpy.db.realm.hs.limit == 0) then
+		x = -20000
+	end
+
 	HonorSpy.pool_size = table.getn(t);
 	local curtime = time()
 	
 	for i = 1, math.min(table.getn(t)) do
+		--Dont go over player limit
+		if (x == HonorSpy.db.realm.hs.limit) then break end
 		local name, class, thisWeekHonor, lastWeekHonor, standing, RP, rank, last_checked = unpack(t[i])
 
 		if (name == playerName) then
 			HonorSpy.player_standing = i;
-		end
-		
-		if (i <= 199) then
-			local last_seen = (curtime - last_checked)
-			local last_seen_human = HonorSpy:HumanTime(last_seen)
+		end		
 
-			local class_color = BC:GetHexColor(class)
-			cat:AddLine(
-				"text", C:Colorize("444444", i).." "..C:Colorize(class_color, name),
-				"text2", C:Colorize(class_color, string.format("%d", thisWeekHonor)),
-				"text3", C:Colorize(class_color, string.format("%d", lastWeekHonor)),
-				"text4", C:Colorize(class_color, string.format("%d", standing)),
-				"text5", C:Colorize(class_color, string.format("%d", RP)),
-				"text6", C:Colorize(class_color, string.format("%d", rank)),
-				"func", function() end,
-				"onEnterFunc", function()
-					GameTooltip:SetOwner(this, "ANCHOR_CURSOR")
-					GameTooltip:AddLine(last_seen_human, 1, 1, 1)
-					GameTooltip:Show()
-				end,
-				"onLeaveFunc", function()
-					GameTooltip:Hide()
-				end
-			)
-		end
+		local last_seen = (curtime - last_checked)
+		local last_seen_human = HonorSpy:HumanTime(last_seen)
+
+		local class_color = BC:GetHexColor(class)
+		cat:AddLine(
+			"text", C:Colorize("444444", i).." "..C:Colorize(class_color, name),
+			"text2", C:Colorize(class_color, string.format("%d", thisWeekHonor)),
+			"text3", C:Colorize(class_color, string.format("%d", lastWeekHonor)),
+			"text4", C:Colorize(class_color, string.format("%d", standing)),
+			"text5", C:Colorize(class_color, string.format("%d", RP)),
+			"text6", C:Colorize(class_color, string.format("%d", rank)),
+			"func", function() end,
+			"onEnterFunc", function()
+				GameTooltip:SetOwner(this, "ANCHOR_CURSOR")
+				GameTooltip:AddLine(last_seen_human, 1, 1, 1)
+				GameTooltip:Show()
+			end,
+			"onLeaveFunc", function()
+				GameTooltip:Hide()
+			end
+		)
+		x = x + 1
 	end
 end
 
