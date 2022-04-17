@@ -1,5 +1,8 @@
 ### Fork of [kakysha/HonorSpy](https://github.com/kakysha/HonorSpy)
 
+### V4 K4
+* Increased pool size
+
 ### V4
 **Delete your WOWFOLDER/WTF/Account/ACCOUNTNAME/SavedVariables/HonorSpy.lua and HonorSpy.lua.bak prior to updating if you are coming from a previous version of HonorSpy.**
 
