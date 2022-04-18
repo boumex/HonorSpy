@@ -1,10 +1,12 @@
 ### Fork of [kakysha/HonorSpy](https://github.com/kakysha/HonorSpy)
 
 ### V4 K4
-* Increased pool size
+Put the extracted folder into **WOWFOLDER/Interface/AddOns** and rename it to **HonorSpy** only.
+**Delete your WOWFOLDER/WTF/Account/ACCOUNTNAME/SavedVariables/HonorSpy.lua and HonorSpy.lua.bak prior to updating if you are coming from a previous version of HonorSpy.**
+
+* Increased pool size by 50% as was added to **Kronos 4** 9th of March
 
 ### V4
-**Delete your WOWFOLDER/WTF/Account/ACCOUNTNAME/SavedVariables/HonorSpy.lua and HonorSpy.lua.bak prior to updating if you are coming from a previous version of HonorSpy.**
 
 Un-merged additions:
 * Added slash command `/hs players 0-10000` to limit number of players shown in table to a specified value. Table functionality was becoming near unusable on Elysium. _Removed artificial limitation from previous version._
