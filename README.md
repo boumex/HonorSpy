@@ -2,7 +2,7 @@
 
 ### V4 K4
 Put the extracted folder into **WOWFOLDER/Interface/AddOns** and rename it to **HonorSpy** only.
-**Delete your WOWFOLDER/WTF/Account/ACCOUNTNAME/SavedVariables/HonorSpy.lua and HonorSpy.lua.bak prior to updating if you are coming from a previous version of HonorSpy.**
+If you are upgrading from previous version of HonorSpy **Delete your WOWFOLDER/WTF/Account/ACCOUNTNAME/SavedVariables/HonorSpy.lua and HonorSpy.lua.bak**
 
 * Increased pool size by 50% as was added to **Kronos 4** 9th of March
 
