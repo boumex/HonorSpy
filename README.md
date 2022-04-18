@@ -1,10 +1,9 @@
 ### Fork of [kakysha/HonorSpy](https://github.com/kakysha/HonorSpy)
 
-### V4 K4
-Put the extracted folder into **WOWFOLDER/Interface/AddOns** and rename it to **HonorSpy** only.
+### V4 Kronos4
 If you are upgrading from previous version of HonorSpy **Delete your WOWFOLDER/WTF/Account/ACCOUNTNAME/SavedVariables/HonorSpy.lua and HonorSpy.lua.bak**
 
-* Increased pool size by 50% as was added to **Kronos 4** 9th of March
+* Increased pool size by 50% as was added to **Kronos 4** 9th of March 2022
 
 ### V4
 
