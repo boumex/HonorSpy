@@ -261,7 +261,7 @@ function HonorSpy:Report(playerOfInterest)
 	local standing = -1
 	local t = HonorSpyStandings:BuildStandingsTable()
 	local avg_lastchecked = 0;
-	self.pool_size = 1.5 * math.ceil(table.getn(t));
+	self.pool_size = math.ceil(1.5 * table.getn(t));
 	for i = 1, table.getn(t) do
 		avg_lastchecked = avg_lastchecked + t[i][8]
 		if (playerOfInterest == t[i][1]) then
