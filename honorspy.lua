@@ -289,7 +289,6 @@ function HonorSpy:Report(playerOfInterest)
 		for i = 2,14 do
 			brk[i] = BreakpointCount(i,compute_pool_size);
 			my_bracket = i;
-			ChatFrame1:AddMessage(BreakpointCount(i,compute_pool_size), 1, 0, 0)
 			if (standing > brk[i]) then
 				if (BreakpointCount(15-standing,compute_pool_size) == 1) then
 					inside_br_progress = 1
