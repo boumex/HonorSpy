@@ -14,7 +14,7 @@ HonorSpy:RegisterDefaults('realm', {
 local commPrefix = "HonorSpy";
 HonorSpy:SetCommPrefix(commPrefix)
 
-local VERSION = "4";
+local VERSION = "4K4";
 local paused = false; -- pause all inspections when user opens inspect frame
 local playerName = UnitName("player");
 
@@ -175,7 +175,7 @@ function HonorSpy:OnClick()
 	HonorSpyStandings:Toggle()
 end
 function HonorSpy:OnTooltipUpdate()
-  T:SetHint("by Kakysha, Mistaboom, and Moxie v"..tostring(VERSION))
+  T:SetHint("by Kakysha, Mistaboom, Moxie and Boumex v"..tostring(VERSION))
 end
 
 -- PAUSING to not mess with native inspect calls
@@ -284,14 +284,36 @@ function HonorSpy:Report(playerOfInterest)
 	--local compute_pool_size = 2841; -- using Anathema's usual pool size
 	local my_bracket = 1;
 	local inside_br_progress = 0;
-	for i = 2,14 do
-		brk[i] = math.floor(brk[i]*compute_pool_size+.5);
-		if (standing > brk[i]) then
-			inside_br_progress = (brk[i-1] - standing)/(brk[i-1] - brk[i])
-			break
+	
+	if (math.floor(brk[14]*compute_pool_size)+0.5 < 1) then
+		for i = 2,14 do
+			brk[i] = BreakpointCount(i,compute_pool_size);
+			my_bracket = i;
+			ChatFrame1:AddMessage(BreakpointCount(i,compute_pool_size), 1, 0, 0)
+			if (standing > brk[i]) then
+				if (BreakpointCount(15-standing,compute_pool_size) == 1) then
+					inside_br_progress = 1
+					my_bracket = 15 - standing;
+					break
+				else
+					inside_br_progress = (BreakpointCount(i-1,compute_pool_size) - standing)/(BreakpointCount(i-1,compute_pool_size) - BreakpointCount(i,compute_pool_size))
+					my_bracket = i;
+					break
+				end;
+			end;
+			
 		end;
-		my_bracket = i;
-	end
+	else
+		for i = 2,14 do
+			brk[i] = math.floor(brk[i]*compute_pool_size+.5);
+			if (standing > brk[i]) then
+				inside_br_progress = (brk[i-1] - standing)/(brk[i-1] - brk[i])
+				break
+			end;
+			my_bracket = i;
+		end;
+	end;
+	
 	if (my_bracket == 14 and standing == 1) then inside_br_progress = 1 end;
 	for i = 3,14 do
 		RP[i] = (i-2) * 1000;
@@ -336,6 +358,18 @@ function HonorSpy:Report(playerOfInterest)
 	
 	return playerOfInterest
 end
+
+-- BREAKPOINT
+	-- num : number of bracket
+	-- ps : pool size
+function BreakpointCount(num,ps)
+	local brk = {1, 0.845, 0.697, 0.566, 0.436, 0.327, 0.228, 0.159, 0.100, 0.060, 0.035, 0.020, 0.008, 0.003} -- brkpoints (post-1.12)
+	if math.floor(brk[num]*ps+.5) < 1 then
+		return 1
+	else
+		return math.floor(brk[num]*ps+.5)
+	end;
+end;
 
 -- MINIMAP
 HonorSpy.defaultMinimapPosition = 200
