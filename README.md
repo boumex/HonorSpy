@@ -4,6 +4,7 @@
 If you are upgrading from previous version of HonorSpy **Delete your WOWFOLDER/WTF/Account/ACCOUNTNAME/SavedVariables/HonorSpy.lua** and **HonorSpy.lua.bak**
 
 * Increased pool size by 50% as was added to **Kronos 4** 9th of March 2022
+* Every bracket has at least 1 spot available
 * Characters with atleast 10 HK are counted to ranking ladder
 
 ### V4
