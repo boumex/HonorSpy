@@ -290,7 +290,7 @@ function HonorSpy:Report(playerOfInterest)
 			brk[i] = BreakpointCount(i,compute_pool_size);
 			my_bracket = i;
 			if (standing > brk[i]) then
-				if (BreakpointCount(15-standing,compute_pool_size) == 1) then
+				if (standing < 15 and BreakpointCount(15-standing,compute_pool_size) == 1) then
 					inside_br_progress = 1
 					my_bracket = 15 - standing;
 					break
