@@ -1,6 +1,8 @@
 ### Fork of [kakysha/HonorSpy](https://github.com/kakysha/HonorSpy)
 
+
 ### V4 Kronos4
+### They changed RankingSystem once more so it doesn't work as intended.
 If you are upgrading from previous version of HonorSpy **Delete your WOWFOLDER/WTF/Account/ACCOUNTNAME/SavedVariables/HonorSpy.lua** and **HonorSpy.lua.bak**
 
 * Increased pool size by 50% as was added to **Kronos 4** 9th of March 2022
